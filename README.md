@@ -1,5 +1,7 @@
 # local-vault-sync
 
+[繁體中文說明](README.zh-TW.md)
+
 `local-vault-sync` is an MVP for syncing Obsidian-style Markdown vaults across devices on the same local network.
 
 ## MVP goals
