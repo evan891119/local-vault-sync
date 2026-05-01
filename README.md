@@ -17,6 +17,12 @@
 - `platform-adapters/` – future platform-specific integration layers.
 - `tests/` – test suites for sync core and adapters.
 
+## Sync metadata model
+
+The initial sync-core data model is documented in `sync-core/README.md`.
+The serializable vault snapshot schema lives in `sync-core/vault-metadata.schema.json`.
+It defines vault identity, vault-relative file metadata, content hash fields, deletion tombstones, and sync state values for later scanner and diff logic.
+
 ## Setup
 
 This repository is currently in initial scaffolding state.

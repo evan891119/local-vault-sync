@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-vault-sync.dev/schemas/vault-metadata.schema.json",
+  "title": "local-vault-sync Vault Snapshot",
+  "description": "Serializable metadata for one scanned Obsidian-style Markdown vault.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "vault", "files"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "description": "Schema version for migration and compatibility checks."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp for when this snapshot was generated."
+    },
+    "vault": {
+      "$ref": "#/$defs/vault"
+    },
+    "files": {
+      "type": "array",
+      "description": "File entries discovered inside the vault, using vault-relative paths.",
+      "items": {
+        "$ref": "#/$defs/fileMetadata"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "vault": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "rootPath"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable local identifier for this vault."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display name for the vault."
+        },
+        "rootPath": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Absolute path to the vault root on this device."
+        },
+        "deviceId": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional stable identifier for the local device that produced the snapshot."
+        }
+      }
+    },
+    "fileMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativePath",
+        "kind",
+        "sizeBytes",
+        "modifiedAt",
+        "contentHash",
+        "deleted",
+        "syncState"
+      ],
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$)).+",
+          "description": "POSIX-style path relative to the vault root. Absolute paths and parent traversal are not allowed."
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["markdown", "asset", "directory"],
+          "description": "Coarse file kind used by scanner and sync preview logic."
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes. Directories should use 0."
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Filesystem modified time captured in UTC."
+        },
+        "contentHash": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/contentHash"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Content hash for files. Directories and deleted entries may use null."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Whether this entry represents a known deletion tombstone."
+        },
+        "syncState": {
+          "$ref": "#/$defs/syncState"
+        }
+      }
+    },
+    "contentHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["sha256"],
+          "description": "Hash algorithm used for the content hash."
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Lowercase hexadecimal hash value."
+        }
+      }
+    },
+    "syncState": {
+      "type": "string",
+      "enum": [
+        "untracked",
+        "unchanged",
+        "added",
+        "modified",
+        "deleted",
+        "conflicted",
+        "ignored"
+      ],
+      "description": "Current sync classification for this entry."
+    }
+  }
+}

@@ -15,6 +15,12 @@
 - `platform-adapters/`：未來放置平台相關整合層。
 - `tests/`：同步核心與平台整合層的測試。
 
+## 同步中繼資料模型
+
+初始 sync-core 資料模型記錄在 `sync-core/README.md`。
+可序列化的 vault snapshot schema 位於 `sync-core/vault-metadata.schema.json`。
+此 schema 定義 vault identity、vault-relative file metadata、content hash 欄位、刪除 tombstone，以及供後續掃描與差異比對使用的 sync state。
+
 ## 設定方式
 
 此 repository 目前仍處於初始腳手架（scaffolding）階段。
