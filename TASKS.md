@@ -3,7 +3,8 @@
 ## Project setup
 - [x] Create repository structure for core modules.
 - [x] Add top-level project documentation.
-- [ ] Select and configure implementation tech stack.
+- [x] Select and configure implementation tech stack.
+- [x] Scaffold Obsidian plugin TypeScript project.
 
 ## Sync core (planned)
 - [ ] Local peer discovery over LAN.

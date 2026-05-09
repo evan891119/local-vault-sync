@@ -2,7 +2,7 @@
 
 [繁體中文說明](README.zh-TW.md)
 
-`local-vault-sync` is an MVP for syncing Obsidian-style Markdown vaults across devices on the same local network.
+`local-vault-sync` is an Obsidian plugin-first MVP for syncing Obsidian-style Markdown vaults across devices on the same local network.
 
 ## MVP goals
 
@@ -10,12 +10,15 @@
 - Sync only over the local network (no cloud dependency).
 - Preserve plain Markdown files and folder structures.
 
-## Initial project structure
+## Project structure
 
-- `sync-core/` – future sync engine logic (discovery, diffing, transfer, conflict handling).
-- `ui/` – future user interface code.
+- `src/main.ts` – Obsidian plugin entry point.
+- `src/settings.ts` – plugin settings model.
+- `src/sync-core/` – TypeScript sync-core contracts and future engine logic.
+- `sync-core/` – sync-core documentation and JSON Schema contracts.
+- `ui/` – future Obsidian UI components if they outgrow the plugin entry point.
 - `platform-adapters/` – future platform-specific integration layers.
-- `tests/` – test suites for sync core and adapters.
+- `tests/` – TypeScript tests for sync core and plugin-safe logic.
 
 ## Sync metadata model
 
@@ -25,13 +28,21 @@ It defines vault identity, vault-relative file metadata, content hash fields, de
 
 ## Setup
 
-This repository is currently in initial scaffolding state.
+This repository is now scaffolded as an Obsidian plugin TypeScript project.
 
 1. Clone the repository.
-2. Review `TASKS.md` for MVP implementation steps.
-3. Add the chosen runtime/tooling stack in a follow-up issue.
+2. Run `npm install`.
+3. Run `npm run dev` for watch builds or `npm run build` for a production bundle.
+4. For local Obsidian development, place or symlink this repository into a vault plugin folder such as `.obsidian/plugins/local-vault-sync/`.
+5. Enable the plugin in Obsidian community plugin settings.
+
+## Scripts
+
+- `npm run dev` – build `main.js` in watch mode.
+- `npm run build` – type-check and bundle the plugin.
+- `npm test` – run sync-core tests.
 
 ## Current status
 
-Only repository structure and planning docs are included in this change.
-No sync functionality is implemented yet.
+The repository has the Obsidian plugin manifest, TypeScript entry point, settings skeleton, esbuild bundling, and Vitest test harness.
+Scanner, hashing, sync preview, conflict detection, LAN transport, and manual sync execution are intentionally left for follow-up issues.

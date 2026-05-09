@@ -1,0 +1,9 @@
+.local-vault-sync-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.local-vault-sync-muted {
+  color: var(--text-muted);
+}

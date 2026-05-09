@@ -1,0 +1,9 @@
+{
+  "id": "local-vault-sync",
+  "name": "Local Vault Sync",
+  "version": "0.1.0",
+  "minAppVersion": "1.8.0",
+  "description": "Local-first LAN sync MVP for Obsidian-style Markdown vaults.",
+  "author": "Evan",
+  "isDesktopOnly": false
+}
