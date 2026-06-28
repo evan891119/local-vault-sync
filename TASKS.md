@@ -7,6 +7,7 @@
 - [x] Scaffold Obsidian plugin TypeScript project.
 
 ## Sync core (planned)
+- [x] Validate mobile plugin filesystem and networking feasibility.
 - [ ] Local peer discovery over LAN.
 - [ ] Vault scan and file change detection.
 - [ ] File transfer protocol for local sync.

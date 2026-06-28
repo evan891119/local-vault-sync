@@ -46,3 +46,7 @@ This repository is now scaffolded as an Obsidian plugin TypeScript project.
 
 The repository has the Obsidian plugin manifest, TypeScript entry point, settings skeleton, esbuild bundling, and Vitest test harness.
 Scanner, hashing, sync preview, conflict detection, LAN transport, and manual sync execution are intentionally left for follow-up issues.
+
+## Mobile support status
+
+Mobile Obsidian plugin filesystem and networking capabilities are still a high-risk area. The DEV-21 feasibility note is documented in `docs/design/mobile-plugin-capability-validation.zh-TW.md`: the MVP should not promise full LAN sync directly inside mobile plugins until real-device probes confirm filesystem, local networking, and foreground transfer behavior.

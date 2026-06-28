@@ -44,3 +44,7 @@
 
 目前已具備 Obsidian plugin manifest、TypeScript 入口、settings 骨架、esbuild bundle 設定與 Vitest 測試架構。
 Vault scanner、hashing、sync preview、conflict detection、區網傳輸與手動同步執行仍保留給後續 issues。
+
+## Mobile 支援狀態
+
+Mobile Obsidian plugin 的檔案系統與網路能力仍屬高風險區域。DEV-21 的初步結論記錄在 `docs/design/mobile-plugin-capability-validation.zh-TW.md`：MVP 不應承諾 mobile plugin 直接完成完整 LAN sync；desktop plugin-first 與 mobile 前景手動驗證會是較安全的短期邊界。
